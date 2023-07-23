@@ -1,7 +1,6 @@
 open Identifiers
 
 let category = "Invoice"
-let category_ = #Invoice
 let streamId = StreamId.gen(InvoiceId.toString)
 
 type raised = {payer_id: PayerId.t, amount: int}
