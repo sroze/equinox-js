@@ -61,10 +61,9 @@ Now that we have a notifier, we need something to actuate it when a message is
 sent.
 
 ```ts
-async function react(streamName: string, events: ITimelineEvent[]) {
-  const [category, streamId] = StreamName.parseCategoryAndId(streamName)
-  if (category !== Message.CATEGORY) return
-  const messageId = MessageId.parse(streamId)
+async function react(streamName: StreamName, events: ITimelineEvent[]) {
+  const messageId = Message.Stream.tryMatch(streamName)
+  if (!messageId) return
   // We know that the MessageSent event is always the first event in the stream 
   // and as such we do not need to check any other event
   const ev = Message.codec.tryDecode(events[0]) 

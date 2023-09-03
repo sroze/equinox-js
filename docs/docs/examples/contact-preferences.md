@@ -9,7 +9,6 @@ import { createHash } from "crypto"
 import { Codec, Decider, LoadOption, ICachingStrategy } from "@equinox-js/core"
 import { equals } from "ramda"
 
-
 export type ClientId = string & { __brand: "ClientId" }
 export const ClientId = {
   ofString: (x: string) => x as ClientId,

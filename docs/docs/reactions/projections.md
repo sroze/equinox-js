@@ -40,8 +40,9 @@ function change(payerId: PayerId, event: Payer.Event): Sql {
   }
 }
 
-function changes(streamName: string, events: ITimelineEvent[]): Sql[] {
-  const payerId = PayerId.parse(StreamName.parseId(streamName))
+function changes(streamName: StreamName, events: ITimelineEvent[]): Sql[] {
+  const payerId = Payer.Stream.tryMatch(streamName)
+  if (!payerId) return []
   const decodedEvents = keepMap(events, Payer.codec.tryDecode)
   const changes: Sql[] = []
   for (const event of events) {

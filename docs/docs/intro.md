@@ -19,8 +19,8 @@ export const AccountId = Uuid.create<"AccountId">()
 export namespace Stream {
   export const Category = "Account"
   export const id = StreamId.gen(AccountId.toString)
-  export const decodeId = StreamName.dec(AccountId.parse)
-  export const match = StreamName.tryMatch(Category, decodeId)
+  export const decodeId = StreamId.dec(AccountId.parse)
+  export const tryMatch = StreamName.tryMatch(Category, decodeId)
 }
 
 export namespace Events {

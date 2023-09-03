@@ -28,8 +28,8 @@ const { Delete, Upsert } = forEntity<Payer, "id">()
 
 export const projection = { table: "payer", id: ["id"] }
 
-function changes(stream: string, events: ITimelineEvent[]): Change[] {
-  const id = PayerId.parse(StreamName.parseId(stream))
+function changes(stream: StreamName, events: ITimelineEvent[]): Change[] {
+  const id = Payer.Stream.tryMatch(stream)
   const event = Payer.codec.tryDecode(events[events.length - 1])
   if (!event) return []
   switch (event.type) {
